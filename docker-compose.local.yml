@@ -1,0 +1,98 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: pos_apotek_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: pos_apotek
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      TZ: Asia/Makassar
+    volumes:
+      - pos_apotek_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d pos_apotek"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - pos_apotek_network
+
+  backend:
+    build:
+      context: ./backend
+    container_name: pos_apotek_backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      NODE_ENV: production
+      APP_HOST: 0.0.0.0
+      APP_PORT: 3000
+      APP_TIMEZONE: Asia/Makassar
+      API_PREFIX: /api
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/pos_apotek?schema=public
+      LOCAL_NETWORK_MODE: "true"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - pos_apotek_network
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: /api
+        VITE_APP_TIMEZONE: Asia/Makassar
+    container_name: pos_apotek_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - pos_apotek_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: pos_apotek_redis
+    restart: unless-stopped
+    volumes:
+      - pos_apotek_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - pos_apotek_network
+    command: redis-server --appendonly yes
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pos_apotek_pgadmin
+    restart: unless-stopped
+    profiles:
+      - tools
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@posapotek.local
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - pos_apotek_network
+
+volumes:
+  pos_apotek_pgdata:
+  pos_apotek_redis_data:
+
+networks:
+  pos_apotek_network:
+    driver: bridge

@@ -1,0 +1,26 @@
+# Dependencies & Build
+node_modules
+dist
+build
+
+# Environment & Logs
+.env
+.env.*
+npm-debug.log*
+yarn-error.log*
+
+# Development
+.vscode
+.idea
+*.swp
+*.swo
+*.DS_Store
+.git
+.gitignore
+
+# Misc
+README.md
+LICENSE
+eslint.config.js
+.prettierrc
+vitest.config.ts

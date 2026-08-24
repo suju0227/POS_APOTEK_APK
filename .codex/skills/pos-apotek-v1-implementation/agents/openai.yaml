@@ -1,0 +1,4 @@
+interface:
+  display_name: "POS Apotek V1 Implementation"
+  short_description: "Build POS Apotek V1 safely."
+  default_prompt: "Use this skill before implementing POS Apotek V1 frontend, backend, stock, sales, purchase, return, report, user, settings, audit-log, or local deployment-sensitive changes."

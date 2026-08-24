@@ -1,0 +1,27 @@
+FROM node:22-alpine AS deps
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --legacy-peer-deps
+
+FROM node:22-alpine AS build
+
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
+
+FROM node:22-alpine AS runner
+
+WORKDIR /app
+ENV NODE_ENV=production
+
+COPY package*.json ./
+COPY prisma ./prisma
+COPY prisma.config.ts ./prisma.config.ts
+COPY --from=build /app/node_modules ./node_modules
+RUN npm prune --omit=dev
+COPY --from=build /app/dist ./dist
+
+EXPOSE 3000
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run db:seed && npm run start:prod"]

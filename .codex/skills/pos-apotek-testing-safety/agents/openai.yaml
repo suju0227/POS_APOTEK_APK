@@ -1,0 +1,4 @@
+interface:
+  display_name: "POS Apotek Testing Safety"
+  short_description: "Run focused POS Apotek checks safely."
+  default_prompt: "Use this skill for POS Apotek test-session planning, manual smoke checks, role security validation, Docker local validation, backup/restore checks, and frontend build checks."

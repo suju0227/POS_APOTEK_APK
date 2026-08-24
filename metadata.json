@@ -1,0 +1,8 @@
+{
+  "name": "POS Apotek",
+  "description": "Aplikasi Point of Sale (POS) Apotek komprehensif dengan manajemen stok batch FEFO, transaksi kasir, pelayanan resep & konseling, pembelian & PO, retur, dan laporan laba.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

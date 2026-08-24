@@ -1,0 +1,23 @@
+services:
+  postgres-test:
+    image: postgres:16-alpine
+    container_name: pos_apotek_test_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pos_apotek_risyah_test
+      TZ: Asia/Makassar
+    ports:
+      - "15433:5432"
+    volumes:
+      - pos_apotek_risyah_test_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d pos_apotek_risyah_test"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  pos_apotek_risyah_test_pgdata:
