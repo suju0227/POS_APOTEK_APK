@@ -265,6 +265,7 @@ export function AppShell() {
                           : 'border-transparent text-slate-500 hover:bg-slate-100 hover:text-slate-900'
                       }`}
                       title={group.label}
+                      aria-label={group.label}
                     >
                       <GroupIcon size={20} />
                     </button>
