@@ -92,12 +92,14 @@ export function LoginPage() {
           <Input
             label="Username atau Email"
             autoComplete="username"
+            required
             error={form.formState.errors.usernameOrEmail?.message}
             {...form.register('usernameOrEmail')}
           />
           <Input
             label="Password"
             type="password"
+            required
             autoComplete="current-password"
             error={form.formState.errors.password?.message}
             {...form.register('password')}
