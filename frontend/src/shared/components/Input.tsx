@@ -10,7 +10,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const inputId = id ?? props.name;
     return (
       <label className="block" htmlFor={inputId}>
-        <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-500">{label}</span>
+        <span className="mb-1.5 flex items-center text-xs font-semibold uppercase tracking-wider text-slate-500">
+          {label}
+          {props.required ? <span className="ml-1 text-red-500" aria-hidden="true">*</span> : null}
+        </span>
         <input
           id={inputId}
           ref={ref}
