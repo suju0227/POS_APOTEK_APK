@@ -1,0 +1,1 @@
+## 2026-10-28 - ARIA labels for icon-only buttons\n**Learning:** Icon-only buttons (like Trash2 for delete) must have aria-labels so screen readers can interpret their function. Without it, visually impaired users won't know what the button does.\n**Action:** Always add aria-labels to buttons that only contain icons, ensuring clarity for all users.
