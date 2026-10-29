@@ -779,6 +779,7 @@ export function PurchasePage() {
                     <Button
                       type="button"
                       variant="secondary"
+                      aria-label="Hapus item"
                       onClick={() =>
                         setItems((current) =>
                           current.filter((candidate) => candidate.id !== item.id),
