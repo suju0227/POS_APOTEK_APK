@@ -1,0 +1,3 @@
+## 2024-05-18 - Missing ARIA Labels on Icon-only Buttons in Complex Forms
+**Learning:** Developers frequently omit `aria-label` on icon-only buttons when rendering repeating UI elements in complex forms (like Prescriptions and Returns arrays). This happens because the shared `Button` component accepts icons as children and cannot strictly enforce text alternatives via TypeScript types.
+**Action:** Always proactively search for `<Button` or `<button` elements wrapping only lucide-react icons without text, especially within mapped arrays or `draftItems` forms. Add `aria-label` with contextual text (e.g., "Hapus item" or "Keluar Sesi") to ensure screen reader accessibility.

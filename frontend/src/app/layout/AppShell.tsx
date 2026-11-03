@@ -370,6 +370,7 @@ export function AppShell() {
                   onClick={handleLogout}
                   className="!h-9 !w-9 !p-0 mt-3 flex items-center justify-center active:scale-95"
                   title="Keluar Sesi"
+                  aria-label="Keluar Sesi"
                 >
                   <LogOut size={14} />
                 </Button>
