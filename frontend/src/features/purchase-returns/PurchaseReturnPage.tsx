@@ -222,7 +222,7 @@ function PurchaseReturnItemEditor({
         )}
       </div>
       <div className="flex items-end">
-        <Button type="button" variant="ghost" disabled={!canRemove} onClick={onRemove}>
+        <Button type="button" variant="ghost" disabled={!canRemove} onClick={onRemove} aria-label="Hapus batch">
           <Trash2 size={16} />
         </Button>
       </div>
