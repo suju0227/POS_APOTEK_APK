@@ -1,0 +1,3 @@
+## 2025-01-20 - Missing ARIA Labels on Custom Components
+**Learning:** Found a pattern of missing `aria-label` attributes on icon-only actions when using the shared `<Button>` component in `frontend/src/shared/components/`. Developers often assumed providing a child icon component was enough, neglecting screen reader accessibility.
+**Action:** Always ensure that when using custom wrapper components (like `Button` here) for icon-only actions, an explicit `aria-label` is still provided to ensure screen readers announce the button's purpose clearly.
