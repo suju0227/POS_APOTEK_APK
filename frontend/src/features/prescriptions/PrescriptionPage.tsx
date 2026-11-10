@@ -286,7 +286,7 @@ function PrescriptionItemEditor({
       <Input label="Aturan pakai" value={item.instruction ?? ''} onChange={(event) => onChange({ ...item, instruction: event.target.value })} />
       <Input label="Catatan item" value={item.note ?? ''} onChange={(event) => onChange({ ...item, note: event.target.value })} />
       <div className="flex items-end">
-        <Button type="button" variant="ghost" disabled={!canRemove} onClick={onRemove}>
+        <Button type="button" variant="ghost" disabled={!canRemove} onClick={onRemove} aria-label="Hapus item">
           <Trash2 size={16} />
         </Button>
       </div>
